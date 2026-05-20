@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XSS Test Page</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 30px;
+    }
+
+    pre {
+      background: #222;
+      padding: 15px;
+      overflow: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>XSS iframe test</h1>
+
+<p>If you can see this page inside the target iframe, embedding works.</p>
+
+<h2>Environment</h2>
+
+<pre id="info"></pre>
+
+<script>
+  const info = {
+    href: location.href,
+    origin: location.origin,
+    referrer: document.referrer,
+    userAgent: navigator.userAgent,
+    topEqualsSelf: window.top === window.self,
+    cookieEnabled: navigator.cookieEnabled
+  };
+
+  document.getElementById("info").textContent =
+    JSON.stringify(info, null, 2);
+
+  console.log("XSS test page loaded", info);
+</script>
+
+</body>
+</html>
